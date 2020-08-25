@@ -2,22 +2,6 @@
 
 Template de readme para apis.
 
-## Deploy Automatizado
-
-| Ambiente                          | Branch                    | URL                                                                                                    |
-| --------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Desenvolvimento                   | `ci/aws-dev`              | https://jenkins.devops.gpa.digital/job/retail-experience/store-api-dev/job/build/job/${project-name}/  |
-| Homologação                       | `ci/aws-hlg`              | https://jenkins.devops.gpa.digital/job/retail-experience/store-api-hlg/job/build/job/${project-name}/  |
-| Produção                          | `ci/aws-prod`             | https://jenkins.devops.gpa.digital/job/retail-experience/store-api-prod/job/build/job/${project-name}/ |
-
-## DNS da API
-
-| Ambiente                          | Branch                    | URL                                        |
-| --------------------------------- | ------------------------- | ------------------------------------------ |
-| Desenvolvimento                   | `ci/aws-dev`              | https://${dev-gateway-host}/${name}        |
-| Homologação                       | `ci/aws-hlg`              | https://${hlg-gateway-host}/${name}        |
-| Produção                          | `ci/aws-prod`             | https://${gateway-host}/${name}            |
-
 # Rodando o Projeto
 
 ## Intellij
@@ -48,7 +32,3 @@ Template de readme para apis.
 
 ## Unitários
 Testes unitários são rodados no momento do build
-
-
-# Documentação do Projeto
-Para mais detalhes sobre a arquitetura do projeto acesse a wiki do projeto https://git.devops.gpa.digital/development/api/retail-experience/store/docs
