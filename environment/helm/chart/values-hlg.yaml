@@ -1,0 +1,19 @@
+image: "dockerImage"
+
+mongodb:
+  uri: "mongodb://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@${HOST}:${PORT}/${DATABASE}?authSource=admin&replicaSet=${REPLICASET}&w=majority&wtimeoutMS=5000&readPreference=primary&gssapiServiceName=mongodb&ssl=true"
+
+maxUnavailable: 0
+
+resources:
+  limits:
+    cpu: 1
+    memory: 1000Mi
+  requests:
+    cpu: 100m
+    memory: 400Mi
+
+env: hlg
+
+routes:
+  hosts: apihlg-meuspremios.fcd.gpa.digital, apihlg-meuspremios-int.fcd.gpa.digital

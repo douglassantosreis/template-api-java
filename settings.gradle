@@ -1,0 +1,6 @@
+rootProject.name = 'java-api-template'
+
+include 'template.domain'
+include 'template.infrastructure'
+include 'template.application'
+

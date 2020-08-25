@@ -1,0 +1,38 @@
+{{- define "application" -}}
+logging:
+  level:
+    root: info
+    br.com.gpa: debug
+management:
+  server:
+    port: 4444
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    enabled-by-default: false
+  endpoint:
+    prometheus:
+      enabled: true
+    health:
+      enabled: true
+      show-details: 'ALWAYS'
+  metrics:
+    tags:
+      application: {{ .Chart.Name }}
+
+server:
+  shutdown: graceful
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 10s
+  main:
+    allow-bean-definition-overriding: true
+    banner-mode: off
+  data:
+    mongodb:
+{{ toYaml .Values.mongodb | indent 6 }}
+{{- end -}}

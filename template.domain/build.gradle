@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group = 'br.com.gpa.template.domain'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    testCompile 'org.mockito:mockito-core:3.+'
+    testCompile 'org.mockito:mockito-junit-jupiter:3+'
+    testCompile 'com.flextrade.jfixture:jfixture:2.7.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
+}

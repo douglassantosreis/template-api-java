@@ -1,0 +1,36 @@
+def awsEcrAccount = "510338013850"
+def imageBaseUrl = "${awsEcrAccount}.dkr.ecr.us-east-1.amazonaws.com"
+def project = "${env.PROJECT}"
+def project_repo = "${env.PROJECT_REPO}"
+def envKey = "${env.ENV_KEY}"
+def publishVersion = "${envKey}-${env.BUILD_ID}"
+
+node {
+    stage('Preparation') {
+        sh "aws ecr get-login --region us-east-1 --no-include-email --registry-ids ${awsEcrAccount} | sh -"
+        checkout scm
+    }
+
+    stage('Build') {
+        sh "./gradlew -Dorg.gradle.java.home=${PATH_JAVA11} clean -PpublishVersion=${envKey}-${env.BUILD_ID} :bootBuildImage --no-daemon"
+    }
+
+    stage('Push Image') {
+        docker.withRegistry("https://${imageBaseUrl}") {
+            docker.image("${project_repo}:${publishVersion}").push(envKey)
+        }
+        sh("docker image ls --filter reference=${project_repo}:${publishVersion} --quiet | xargs docker image rm -f")
+    }
+
+    if(env.DEPLOY == 'true'){
+        stage('Deploy') {
+            build job: "guidedbuying-${envKey}/deploy/${project}", parameters: [
+                [$class: 'StringParameterValue', name: 'NODE_NAME', value: "${env.NODE_NAME}"]
+            ]
+        }
+    }
+
+    stage('Cleanup') {
+        cleanWs()
+    }
+}

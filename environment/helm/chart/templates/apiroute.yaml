@@ -1,0 +1,17 @@
+apiVersion: gpa.com.br/v1
+kind: APIRoute
+metadata:
+  name: {{ .Chart.Name }}
+  labels:
+    app: {{ .Chart.Name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  host: {{ .Values.routes.hosts }}
+  routes:
+    - filters:
+      id: {{ .Release.Name }}-template
+      predicates:
+        - 'Path=/template'
+      uri: 'http://{{ .Chart.Name }}.template-{{ .Values.env }}'

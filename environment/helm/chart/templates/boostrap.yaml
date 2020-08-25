@@ -1,0 +1,14 @@
+{{- define "bootstrap" -}}
+spring:
+  application:
+    name: {{ .Chart.Name }}
+  main:
+    banner-mode: off
+  cloud:
+    kubernetes:
+      reload:
+        enabled: true
+        mode: polling
+  profiles:
+    active: kubernetes
+{{- end -}}
